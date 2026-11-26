@@ -19,13 +19,16 @@ Automatische Generierung einer kombinierten M3U-Playlist mit mehreren Quellen vi
 .
 ├── .github/
 │   └── workflows/
-│       └── generate-playlist.yml    # GitHub Actions Workflow
+│       ├── generate-playlist.yml    # Playlist erzeugen (täglich, bei Push, manuell)
+│       └── deploy-worker.yml        # Cloudflare Worker deployen (bei Push auf cloudflare-worker/)
 ├── cloudflare-worker/               # Xtream Codes API Server (Cloudflare Workers)
 │   ├── worker.js                    # Serverless API Implementation
 │   ├── wrangler.toml               # Worker Konfiguration
-│   └── README.md                    # Deployment-Anleitung
+│   ├── README.md                    # Deployment-Anleitung
+│   └── GITHUB_SECRETS_SETUP.md      # Secrets für das automatische Deployment
 ├── sources/                         # M3U-Quelldateien (beliebige *.m3u Dateien)
-│   ├── init7_channels.m3u          # Init7 TV Kanäle
+│   ├── TV7_HLS.m3u                 # M3U-Quelle (HLS)
+│   ├── srg-fhd-hls.m3u             # M3U-Quelle (HLS)
 │   └── README.md                    # Dokumentation
 ├── config.yaml                      # Konfigurationsdatei
 ├── generate_playlist.py             # Generator-Script
@@ -43,6 +46,11 @@ Die Playlist wird automatisch generiert:
 - **Manuell** über GitHub Actions UI
 
 Die generierte `playlist.m3u` wird automatisch ins Repository committed.
+
+Der Cloudflare Worker wird von `deploy-worker.yml` automatisch deployed, sobald
+sich etwas unter `cloudflare-worker/` ändert (oder manuell). Die nötigen
+GitHub Secrets stehen in
+[`cloudflare-worker/GITHUB_SECRETS_SETUP.md`](cloudflare-worker/GITHUB_SECRETS_SETUP.md).
 
 ### Lokal
 
