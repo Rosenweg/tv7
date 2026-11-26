@@ -116,16 +116,16 @@ Server URL: https://xtream.ihredomain.com
 
 ### Mehrere Benutzer
 
-Fügen Sie in `worker.js` weitere Credentials hinzu:
+Zugangsdaten stehen nie in `worker.js`. Weitere Benutzer kommen als JSON-Array
+in das GitHub-Secret `XTREAM_CREDENTIALS` (siehe [GITHUB_SECRETS_SETUP.md](GITHUB_SECRETS_SETUP.md)):
 
-```javascript
-CREDENTIALS: [
-  { username: 'user1', password: 'pass1' },
-  { username: 'user2', password: 'pass2' },
-  { username: 'familie', password: 'geheim' },
-  { username: 'gast', password: 'gast123' }
-],
+```json
+[{"username":"familie","password":"<langes Passwort>"},{"username":"gast","password":"<langes Passwort>"}]
 ```
+
+Ohne `XTREAM_USERNAME`/`XTREAM_PASSWORD` und ohne `XTREAM_CREDENTIALS`
+antwortet der Worker auf jede Anfrage mit `500` „Server nicht konfiguriert“.
+Eingebaute Standard-Zugangsdaten gibt es nicht.
 
 ### Playlist-URL ändern
 

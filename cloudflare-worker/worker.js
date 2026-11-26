@@ -2,18 +2,16 @@
  * Xtream Codes API Cloudflare Worker
  * Stellt eine Xtream Codes API für M3U Playlists bereit
  *
- * HINWEIS: Credentials werden aus Environment Variables geladen (GitHub Secrets)
- * Fallback auf hardcoded Werte wenn keine Env Variables gesetzt sind
+ * HINWEIS: Zugangsdaten kommen nur aus Environment Variables (GitHub Secrets
+ * XTREAM_USERNAME/XTREAM_PASSWORD bzw. XTREAM_CREDENTIALS). Es gibt keine
+ * eingebauten Standard-Zugangsdaten: ohne gesetzte Variablen verweigert der
+ * Worker jede Anfrage (500, "Server nicht konfiguriert").
  */
 
-// Default Konfiguration (Fallback)
+// Default Konfiguration (ohne Zugangsdaten)
 const DEFAULT_CONFIG = {
   PLAYLIST_URL: 'https://raw.githubusercontent.com/Rosenweg/tv7/main/playlist.m3u',
-  WORKER_URL: 'https://xtream-api.workers.dev',
-  CREDENTIALS: [
-    { username: 'user1', password: 'pass1' },
-    { username: 'admin', password: 'secret123' }
-  ]
+  WORKER_URL: 'https://xtream-api.workers.dev'
 };
 
 /**
@@ -39,16 +37,20 @@ function getConfig(env) {
   if (env.CREDENTIALS) {
     try {
       const jsonCreds = JSON.parse(env.CREDENTIALS);
-      credentials = credentials.concat(jsonCreds);
+      if (Array.isArray(jsonCreds)) {
+        credentials = credentials.concat(jsonCreds);
+      }
     } catch (e) {
       console.error('Failed to parse CREDENTIALS env var, ignoring');
     }
   }
 
-  // Fallback auf Default wenn keine Credentials gesetzt
-  if (credentials.length === 0) {
-    credentials = DEFAULT_CONFIG.CREDENTIALS;
-  }
+  // Nur vollständige Einträge zählen (Benutzer und Passwort nicht leer).
+  // Kein Rückfall auf eingebaute Werte: fehlt alles, bleibt die Liste leer.
+  credentials = credentials.filter(
+    cred => cred && typeof cred.username === 'string' && cred.username !== '' &&
+            typeof cred.password === 'string' && cred.password !== ''
+  );
 
   return {
     PLAYLIST_URL: playlistUrl,
@@ -92,6 +94,14 @@ async function handleRequest(request, env) {
 
   if (request.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Ohne konfigurierte Zugangsdaten nichts ausliefern
+  if (CONFIG.CREDENTIALS.length === 0) {
+    console.error('Keine Zugangsdaten gesetzt (XTREAM_USERNAME/XTREAM_PASSWORD oder CREDENTIALS)');
+    return jsonResponse({
+      error: 'Server nicht konfiguriert: XTREAM_USERNAME und XTREAM_PASSWORD (oder CREDENTIALS) fehlen'
+    }, 500, corsHeaders);
   }
 
   // Authentifizierung
@@ -391,8 +401,7 @@ function getWelcomePage(CONFIG) {
     <h2>📡 IPTV Smarters Pro Setup</h2>
     <div class="endpoint">
       <strong>Server URL:</strong> <code>${CONFIG.SERVER_INFO.url}</code><br>
-      <strong>Username:</strong> <code>user1</code><br>
-      <strong>Password:</strong> <code>pass1</code>
+      <strong>Username / Password:</strong> von der Technik
     </div>
 
     <h2>🔗 API Endpoints</h2>
