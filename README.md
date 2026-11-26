@@ -1,160 +1,108 @@
-# M3U Playlist Generator
+<p align="center"><img src="docs/logo.png" width="96" alt="Logo"></p>
+<h1 align="center">Rosenweg TV-Playlist</h1>
+<p align="center">Eine gemeinsame Senderliste (M3U) fürs Fernsehen im Rosenweg – für jede IPTV-App auf Fernseher, Handy oder PC.</p>
+<p align="center"><a href="https://raw.githubusercontent.com/Rosenweg/tv7/main/playlist.m3u">Playlist</a> · <a href="docs/anleitung.md">Anleitung</a></p>
 
-Automatische Generierung einer kombinierten M3U-Playlist mit mehreren Quellen via GitHub Actions.
+## Inhalt
 
-## Features
+- [Überblick](#überblick)
+- [Plattformen](#plattformen)
+- [Bedienung](#bedienung)
+- [Sender](#sender)
+- [Aufbau](#aufbau)
+- [Playlist erzeugen](#playlist-erzeugen)
+- [CI und Ausrollen](#ci-und-ausrollen)
+- [Konfiguration](#konfiguration)
+- [Lizenz](#lizenz)
 
-- ✅ **Xtream Codes API Server** - Eigene API auf Cloudflare Workers (serverless & kostenlos!)
-- ✅ **Xtream Codes Client** - Integration von IPTV-Anbietern mit Xtream API
-- ✅ **Init7 TV** - Automatischer Import aller Init7 TV-Kanäle
-- ✅ **Lokale M3U-Dateien** - Beliebige M3U-Dateien aus `sources/` Ordner
-- ✅ **go2rtc Streams** - Integration eigener Streams
-- ✅ **GitHub Actions** - Automatische tägliche Aktualisierung
-- ✅ **TVG-Attribute** - Unterstützung für Logos, Gruppen, EPG-IDs
-- ✅ **Einfache Konfiguration** - Alles über YAML konfigurierbar
+## Überblick
 
-## Struktur
+Das Repo erzeugt jeden Tag eine fertige Playlist mit Schweizer Sendern und stellt sie auf zwei Arten bereit:
 
-```
-.
-├── .github/
-│   └── workflows/
-│       ├── generate-playlist.yml    # Playlist erzeugen (täglich, bei Push, manuell)
-│       └── deploy-worker.yml        # Cloudflare Worker deployen (bei Push auf cloudflare-worker/)
-├── cloudflare-worker/               # Xtream Codes API Server (Cloudflare Workers)
-│   ├── worker.js                    # Serverless API Implementation
-│   ├── wrangler.toml               # Worker Konfiguration
-│   ├── README.md                    # Deployment-Anleitung
-│   └── GITHUB_SECRETS_SETUP.md      # Secrets für das automatische Deployment
-├── sources/                         # M3U-Quelldateien (beliebige *.m3u Dateien)
-│   ├── TV7_HLS.m3u                 # M3U-Quelle (HLS)
-│   ├── srg-fhd-hls.m3u             # M3U-Quelle (HLS)
-│   └── README.md                    # Dokumentation
-├── config.yaml                      # Konfigurationsdatei
-├── generate_playlist.py             # Generator-Script
-├── requirements.txt                 # Python-Dependencies
-└── playlist.m3u                     # Generierte Playlist (automatisch erstellt)
-```
+- **M3U-Adresse** – funktioniert in jeder IPTV-App.
+- **Xtream-Codes-Server** auf Cloudflare Workers – Anmeldung mit Benutzer und Passwort statt einer langen URL, mit automatischen Kategorien. Empfohlen für Fernseher mit Vidaa OS.
 
-## Verwendung
+Die Quellen lassen sich frei kombinieren: Init7 TV, eigene M3U-Dateien, ein Xtream-Anbieter und go2rtc-Streams. Senderlogos, Gruppen und EPG-Kennungen werden mitgeliefert.
 
-### Automatisch (GitHub Actions)
+## Plattformen
 
-Die Playlist wird automatisch generiert:
-- **Täglich** um 6:00 UTC
-- Bei **Push** auf main/master (wenn config.yaml oder generate_playlist.py geändert wurden)
-- **Manuell** über GitHub Actions UI
+| Plattform | Stand |
+|---|---|
+| IPTV Smarters Pro (auch auf Vidaa-Fernsehern) | ja, per Xtream-Login oder M3U |
+| VLC, Kodi, TiviMate und andere IPTV-Apps | ja, per M3U-Adresse |
 
-Die generierte `playlist.m3u` wird automatisch ins Repository committed.
+## Bedienung
 
-Der Cloudflare Worker wird von `deploy-worker.yml` automatisch deployed, sobald
-sich etwas unter `cloudflare-worker/` ändert (oder manuell). Die nötigen
-GitHub Secrets stehen in
-[`cloudflare-worker/GITHUB_SECRETS_SETUP.md`](cloudflare-worker/GITHUB_SECRETS_SETUP.md).
+| Weg | So geht's |
+|---|---|
+| M3U-Adresse | In der App „Playlist/URL laden“ wählen und `https://raw.githubusercontent.com/Rosenweg/tv7/main/playlist.m3u` eingeben |
+| Xtream-Login | In IPTV Smarters Pro „Login with Xtream Codes API“ wählen, als Server die Worker-Adresse eintragen, dazu Benutzer und Passwort |
 
-### Lokal
+Benutzer und Passwort für den Xtream-Login gibt die Technik heraus.
+
+Mehr: [docs/anleitung.md](docs/anleitung.md).
+
+## Sender
+
+Aus Init7 TV, je nach Verfügbarkeit:
+
+| Sprache | Sender |
+|---|---|
+| Deutsch | SRF 1, SRF zwei, SRF info |
+| Französisch | RTS 1, RTS 2 |
+| Italienisch | RSI LA 1, RSI LA 2 |
+
+Dazu die Dateien in `sources/` (z.B. TV7 und SRG in Full HD) und weitere Kanäle je nach Init7-Angebot.
+
+## Aufbau
+
+| Teil | Inhalt |
+|---|---|
+| `generate_playlist.py` | Generator: liest alle Quellen und schreibt `playlist.m3u` |
+| `config.yaml` | Welche Quellen aktiv sind, Ausgabe, Gruppen, TVG-Attribute |
+| `sources/` | Beliebige `*.m3u`-Dateien, alphabetisch eingelesen ([sources/README.md](sources/README.md)) |
+| `playlist.m3u` | Die erzeugte Playlist (wird automatisch eingecheckt) |
+| `cloudflare-worker/` | Xtream-Codes-Server (`worker.js`, `wrangler.toml`), liest immer die neueste Playlist von GitHub ([Anleitung](cloudflare-worker/README.md)) |
+
+## Playlist erzeugen
 
 ```bash
-# Dependencies installieren
 pip install -r requirements.txt
-
-# Playlist generieren
 python generate_playlist.py
 ```
 
+Hinweis: Die Init7-API ist oft nur für Init7-Kunden erreichbar – dann besser lokale M3U-Dateien in `sources/` verwenden.
+
+## CI und Ausrollen
+
+| Workflow | Auslöser | Ergebnis |
+|---|---|---|
+| `generate-playlist.yml` | täglich 6:00 UTC, Push mit Änderungen an `config.yaml` oder `generate_playlist.py`, von Hand | neue `playlist.m3u` wird eingecheckt |
+| `deploy-worker.yml` | Push mit Änderungen unter `cloudflare-worker/`, von Hand | Worker wird auf Cloudflare ausgerollt |
+
 ## Konfiguration
 
-Bearbeiten Sie `config.yaml` um die Playlist anzupassen:
+**Quellen in `config.yaml`:**
 
-### Init7 Streams (API)
+| Abschnitt | Wozu |
+|---|---|
+| `init7` | Init7-Senderliste (`enabled`, `url`) |
+| `sources` | Verzeichnis mit eigenen M3U-Dateien |
+| `xtream` | Externer Xtream-Anbieter (`server`, `username`, `password`, Live/VOD/Serien) – Zugangsdaten nie einchecken |
+| `go2rtc` | Eigene Streams über go2rtc (`base_url`, `streams`) |
+| `output` | Dateiname, Gruppen, TVG-Attribute |
 
-```yaml
-init7:
-  enabled: true
-  url: "https://api.init7.net/tvchannels.m3u?rp=true"
-```
+**GitHub-Secrets** für den Worker, nur die Namen (Einrichtung: [cloudflare-worker/GITHUB_SECRETS_SETUP.md](cloudflare-worker/GITHUB_SECRETS_SETUP.md)):
 
-**Hinweis:** Die Init7 API ist oft nur für Init7-Kunden erreichbar. Verwenden Sie stattdessen lokale M3U-Dateien im `sources/` Ordner.
+| Secret | Wozu |
+|---|---|
+| `XTREAM_USERNAME`, `XTREAM_PASSWORD` | Login am Xtream-Server (ein Benutzer) |
+| `XTREAM_CREDENTIALS` | Alternative: mehrere Benutzer |
+| `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | Ausrollen auf Cloudflare Workers |
+| `PLAYLIST_URL`, `WORKER_URL` | optional, eigene Adressen statt der Vorgaben |
 
-### Lokale M3U-Dateien
+Mehr: [docs/entwickeln.md](docs/entwickeln.md).
 
-```yaml
-sources:
-  enabled: true
-  directory: "sources"
-```
+## Lizenz
 
-Legen Sie beliebige `*.m3u` Dateien im `sources/` Verzeichnis ab. Alle Dateien werden automatisch eingelesen.
-
-### Xtream Codes API
-
-Falls Sie einen IPTV-Anbieter mit Xtream Codes API haben:
-
-```yaml
-xtream:
-  enabled: true
-  server: "http://your-server.com:8080"
-  username: "your_username"
-  password: "your_password"
-  include_live: true      # Live TV Kanäle
-  include_vod: false      # Video on Demand
-  include_series: false   # Serien
-```
-
-**Verwendung in IPTV Smarters Pro:**
-- Diese Daten können Sie direkt in IPTV Smarters Pro eingeben
-- Oder Sie nutzen die generierte M3U-Playlist (siehe unten)
-
-### go2rtc Streams (optional)
-
-Falls Sie go2rtc verwenden, können Sie zusätzliche Streams in der `config.yaml` konfigurieren. Details siehe `config.yaml`.
-
-## Playlist verwenden
-
-### 🎯 Option 1: Xtream Codes API Server (EMPFOHLEN für Vidaa OS!)
-
-**Vorteile:**
-- ✅ Login mit Username/Password statt URL
-- ✅ Automatische Kategorisierung
-- ✅ Bessere User Experience in IPTV Apps
-- ✅ Komplett kostenlos (Cloudflare Workers)
-
-**Setup:**
-1. Siehe [`cloudflare-worker/README.md`](cloudflare-worker/README.md) für Deployment
-2. Nach Deployment erhalten Sie eine URL: `https://xtream-api.ihre-subdomain.workers.dev`
-3. In IPTV Smarters Pro:
-   - Wählen Sie **"Login with Xtream Codes API"**
-   - Server: `https://xtream-api.ihre-subdomain.workers.dev`
-   - Username/Password: (wie in worker.js konfiguriert)
-
-### 📺 Option 2: M3U Playlist URL
-
-**Für alle IPTV Apps (VLC, Kodi, TiviMate, etc.)**
-
-1. In IPTV Smarters Pro: Wählen Sie "Load Your Playlist or File/URL"
-2. Geben Sie die URL ein: `https://raw.githubusercontent.com/Rosenweg/tv7/main/playlist.m3u`
-
-### URL zur generierten Playlist
-
-Die Playlist ist unter folgender URL verfügbar:
-
-```
-https://raw.githubusercontent.com/Rosenweg/tv7/main/playlist.m3u
-```
-
-Diese URL funktioniert in allen IPTV-Apps (VLC, Kodi, TiviMate, etc.)
-
-## Init7 TV-Kanäle
-
-Die Playlist enthält alle verfügbaren Init7 TV-Kanäle:
-
-- 🇩🇪 **Deutsch**: SRF 1, SRF zwei, SRF info
-- 🇫🇷 **Français**: RTS 1, RTS 2
-- 🇮🇹 **Italiano**: RSI LA 1, RSI LA 2
-
-Und weitere Kanäle je nach Init7-Verfügbarkeit.
-
-## Links
-
-- [Init7 TV](https://www.init7.net/de/tv/)
-- [Init7 Support](https://www.init7.net/de/support/)
+Keine Lizenz hinterlegt – alle Rechte vorbehalten.
