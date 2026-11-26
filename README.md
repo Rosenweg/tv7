@@ -27,7 +27,7 @@ Automatische Generierung einer kombinierten M3U-Playlist mit mehreren Quellen vi
 │   ├── README.md                    # Deployment-Anleitung
 │   └── GITHUB_SECRETS_SETUP.md      # Secrets für das automatische Deployment
 ├── sources/                         # M3U-Quelldateien (beliebige *.m3u Dateien)
-│   ├── TV7_HLS.m3u                 # TV7-Kanäle (HLS)
+│   ├── TV7_HLS.m3u                 # M3U-Quelle (HLS)
 │   ├── srg-fhd-hls.m3u             # M3U-Quelle (HLS)
 │   └── README.md                    # Dokumentation
 ├── config.yaml                      # Konfigurationsdatei
