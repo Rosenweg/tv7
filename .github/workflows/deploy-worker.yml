@@ -13,6 +13,10 @@ on:
       - 'cloudflare-worker/**'
       - '.github/workflows/deploy-worker.yml'
 
+# Nur lesen: der Lauf holt den Quelltext und spielt mit dem Cloudflare-Token aus.
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
