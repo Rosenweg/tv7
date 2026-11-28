@@ -5,9 +5,7 @@ https://api.tv.init7.net/api/live/?channel=b87abb69-d5ed-44c5-8cab-0f7be4ef51b1
 https://api.tv.init7.net/api/live/?channel=569da6ec-08a0-43c2-a2c1-35be5d3f08b5
 #EXTINF:-1 tvg-name="SRFinfo.ch" tvg-logo="https://api.tv.init7.net/media/logos/1106_SRFinfo.ch.png" group-title="de",SRF info
 https://api.tv.init7.net/api/live/?channel=f670033f-72c6-4bfa-9db7-43f78e428659
-#EXTINF:-1 tvg-name="TV24.ch" tvg-logo="https://api.tv.init7.net/media/logos/1114_TV24.ch.png" group-title="de",TV 24
-https://api.tv.init7.net/api/live/?channel=8f9a650f-4f7a-4df3-8818-90c5a701a075
-#EXTINF:-1 tvg-name="3plus.ch" tvg-logo="https://api.tv.init7.net/media/logos/1116_3Plus.ch.png" group-title="de",3+ HD
+#EXTINF:-1 tvg-name="3plus.ch" tvg-logo="https://api.tv.init7.net/media/logos/1116_3_7WeWMsw.png" group-title="de",3+
 https://api.tv.init7.net/api/live/?channel=76e5f981-d1c3-4cd7-83d5-3cbd4d6f7b62
 #EXTINF:-1 tvg-name="DasErste.de" tvg-logo="https://api.tv.init7.net/media/logos/1118_DasErste.de.png" group-title="de",Das Erste
 https://api.tv.init7.net/api/live/?channel=17efa6a3-b474-4f4e-90ae-37c8e3d984da
@@ -27,11 +25,13 @@ https://api.tv.init7.net/api/live/?channel=457564f4-3d1d-4ca4-880c-8818caee2646
 https://api.tv.init7.net/api/live/?channel=dc678a61-d8c8-4d27-adfe-debdf3f44f7c
 #EXTINF:-1 tvg-name="arte.de" tvg-logo="https://api.tv.init7.net/media/logos/1134_arte.de.png" group-title="de",arte D
 https://api.tv.init7.net/api/live/?channel=8890a53a-5b81-46e7-82a7-18462d3ee56c
-#EXTINF:-1 tvg-name="TV25.ch" tvg-logo="https://api.tv.init7.net/media/logos/1136_TV25.ch.png" group-title="de",TV 25
+#EXTINF:-1 tvg-name="TV24.ch" tvg-logo="https://api.tv.init7.net/media/logos/1114_3_Adrenalin.png" group-title="de",3+ ADRENALIN
+https://api.tv.init7.net/api/live/?channel=8f9a650f-4f7a-4df3-8818-90c5a701a075
+#EXTINF:-1 tvg-name="TV25.ch" tvg-logo="https://api.tv.init7.net/media/logos/1136_3_Emotion.png" group-title="de",3+ EMOTION
 https://api.tv.init7.net/api/live/?channel=736f3864-697f-4dda-a0b7-e654a805e430
-#EXTINF:-1 tvg-name="4plus.ch" tvg-logo="https://api.tv.init7.net/media/logos/1138_4Plus.ch.png" group-title="de",4+ HD
+#EXTINF:-1 tvg-name="4plus.ch" tvg-logo="https://api.tv.init7.net/media/logos/1138_3_Movies.png" group-title="de",3+ MOVIES
 https://api.tv.init7.net/api/live/?channel=81b50552-e06d-41c1-a096-2fa496298f4c
-#EXTINF:-1 tvg-name="S1.ch" tvg-logo="https://api.tv.init7.net/media/logos/1144_S1.ch.png" group-title="de",S1
+#EXTINF:-1 tvg-name="S1.ch" tvg-logo="https://api.tv.init7.net/media/logos/1144_3_Focus.png" group-title="de",3+ FOCUS
 https://api.tv.init7.net/api/live/?channel=0a87ab1b-6fbd-45c4-b460-a19793e17f11
 #EXTINF:-1 tvg-name="Swiss1.ch" tvg-logo="https://api.tv.init7.net/media/logos/1146_Swiss1.ch.png" group-title="de",SWISS 1
 https://api.tv.init7.net/api/live/?channel=7e23fd3e-68cf-4a49-8197-9a685838fb1e
@@ -51,7 +51,7 @@ https://api.tv.init7.net/api/live/?channel=2c477d21-39be-405e-88cd-d7f5d0f0968a
 https://api.tv.init7.net/api/live/?channel=12d8332f-382a-400e-9796-d2cafc0d8d98
 #EXTINF:-1 tvg-name="TeleM1.ch" tvg-logo="https://api.tv.init7.net/media/logos/1216_TeleM1.ch.png" group-title="de",Tele M1
 https://api.tv.init7.net/api/live/?channel=72367f92-12a2-418d-9107-bb72e9cb015d
-#EXTINF:-1 tvg-name="TeleTop.ch" tvg-logo="https://api.tv.init7.net/media/logos/1220_TeleTop.ch.png" group-title="de",Tele Top
+#EXTINF:-1 tvg-name="TeleTop.ch" tvg-logo="https://api.tv.init7.net/media/logos/1220_TeleTop.ch_xSNGUlI.png" group-title="de",Tele Top
 https://api.tv.init7.net/api/live/?channel=662f4a1a-6440-4eb8-95dd-ec1674e07b4c
 #EXTINF:-1 tvg-name="TVO.ch" tvg-logo="https://api.tv.init7.net/media/logos/1224_TVO.ch.png" group-title="de",TVO
 https://api.tv.init7.net/api/live/?channel=a43bcf79-e343-4a13-8276-22d075f57486
@@ -61,6 +61,8 @@ https://api.tv.init7.net/api/live/?channel=80eeb70b-66c1-4464-8fee-1838b6f0657c
 https://api.tv.init7.net/api/live/?channel=8908d593-468d-4ac7-956c-f51f70276265
 #EXTINF:-1 tvg-name="TeleBielingue.ch" tvg-logo="https://api.tv.init7.net/media/logos/1240_TeleBielingue.ch.png" group-title="de",TeleBielingue
 https://api.tv.init7.net/api/live/?channel=02f623ce-72bb-436c-a63a-d203b334d7a2
+#EXTINF:-1 tvg-name="CanalBD.ch" tvg-logo="https://api.tv.init7.net/media/logos/CanalB_I5sZHin.png" group-title="de",Canal B D
+https://api.tv.init7.net/api/live/?channel=cd05e178-025e-4bf5-be54-975204f72d58
 #EXTINF:-1 tvg-name="SchaffhauserFernsehen.ch" tvg-logo="https://api.tv.init7.net/media/logos/1244_SchaffhauserFernsehen.ch.png" group-title="de",ShF
 https://api.tv.init7.net/api/live/?channel=4925fef9-dbb5-4bbd-9520-63596ec32239
 #EXTINF:-1 tvg-name="Kanal9.ch" tvg-logo="https://api.tv.init7.net/media/logos/1252_Kanal9.ch.png" group-title="de",Kanal 9
@@ -81,7 +83,7 @@ https://api.tv.init7.net/api/live/?channel=5321d144-8e9c-4cb6-99a1-e20bf27024ff
 https://api.tv.init7.net/api/live/?channel=75cfe5fd-d342-4534-b48f-0d98e0f89382
 #EXTINF:-1 tvg-name="Sport1.de" tvg-logo="https://api.tv.init7.net/media/logos/1412_Sport1.de.png" group-title="de",SPORT1
 https://api.tv.init7.net/api/live/?channel=39ff8c41-e4f8-4ac4-a607-aa830d95f6bd
-#EXTINF:-1 tvg-name="7PlusNickSchweiz.ch" tvg-logo="https://api.tv.init7.net/media/logos/1504_7PlusNickSchweiz.ch.png" group-title="de",7+/ Nick CH
+#EXTINF:-1 tvg-name="7PlusNickSchweiz.ch" tvg-logo="https://api.tv.init7.net/media/logos/1504_3_Family.png" group-title="de",3+ FAMILY
 https://api.tv.init7.net/api/live/?channel=6f58ff0e-0bf4-4a9f-9d08-c33ea82e2cbb
 #EXTINF:-1 tvg-name="RTLSuper.de" tvg-logo="https://api.tv.init7.net/media/logos/1508_RTLSuper.de.png" group-title="de",Super RTL (Schweiz)
 https://api.tv.init7.net/api/live/?channel=3774d733-fd09-4827-9317-2e28307c55ab
@@ -121,6 +123,8 @@ https://api.tv.init7.net/api/live/?channel=dd12bff5-8dda-42db-8b1c-50a0bc6b8d47
 https://api.tv.init7.net/api/live/?channel=01acf875-7897-4aba-ae43-d50937a8af0c
 #EXTINF:-1 tvg-name="LemanBleu.ch" tvg-logo="https://api.tv.init7.net/media/logos/2208_LemanBleu.ch.png" group-title="fr",léman bleu
 https://api.tv.init7.net/api/live/?channel=8d8edcad-32d6-49b1-888e-6ee473892001
+#EXTINF:-1 tvg-name="CanalBF.ch" tvg-logo="https://api.tv.init7.net/media/logos/CanalB.png" group-title="fr",Canal B F
+https://api.tv.init7.net/api/live/?channel=262d3be0-133f-438b-a496-448a17fc4275
 #EXTINF:-1 tvg-name="CanalAlphaJU.ch" tvg-logo="https://api.tv.init7.net/media/logos/2212_CanalAlphaJU.ch.png" group-title="fr",Canal Alpha JU
 https://api.tv.init7.net/api/live/?channel=68866db8-71ef-46dc-9a6a-b26bdf564a19
 #EXTINF:-1 tvg-name="CanalAlphaNE.ch" tvg-logo="https://api.tv.init7.net/media/logos/2216_CanalAlphaNE.ch.png" group-title="fr",Canal Alpha NE
@@ -199,8 +203,6 @@ https://api.tv.init7.net/api/live/?channel=0adfbec1-4acc-44e7-9391-a95ed0bf2094
 https://api.tv.init7.net/api/live/?channel=643b0267-00f1-4d18-8695-6d89743d5fe7
 #EXTINF:-1 tvg-name="BloombergTVEurope.uk" tvg-logo="https://api.tv.init7.net/media/logos/4320_BloombergTVEurope.uk.png" group-title="en",Bloomberg TV
 https://api.tv.init7.net/api/live/?channel=99a6aa98-e2d8-491f-b268-4103e928c916
-#EXTINF:-1 tvg-name="EuronewsEnglish.fr" tvg-logo="https://api.tv.init7.net/media/logos/4328_EuronewsEnglish.fr.png" group-title="en",euronews E
-https://api.tv.init7.net/api/live/?channel=d1610d57-25e8-430b-b336-19ac539da877
 #EXTINF:-1 tvg-name="SRF1.ch" tvg-logo="https://api.tv.init7.net/media/logos/1102_SRF1.ch.png" group-title="de",SRF 1
 https://api.tv.init7.net/api/live/?channel=b87abb69-d5ed-44c5-8cab-0f7be4ef51b1
 #EXTINF:-1 tvg-name="SRFzwei.ch" tvg-logo="https://api.tv.init7.net/media/logos/1104_SRFzwei.ch.png" group-title="de",SRF zwei
